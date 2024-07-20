@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.velocity.order.model.Order;
 import com.velocity.order.service.OrderService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Order Controller", description = "APIs for order Service")
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
@@ -25,6 +29,7 @@ public class OrderController {
 		this.orderService = orderService;
 	}
 
+	@Operation(summary = "Get the order details")
 	@GetMapping("/{id}")
 	public ResponseEntity<Order> getOrderDetail(@PathVariable Long id) {
 		LOG.info("Fetching order with ID: {}", id);
@@ -36,6 +41,7 @@ public class OrderController {
 		}
 	}
 
+	@Operation(summary = "Adding new order")
 	@PostMapping
 	public ResponseEntity<Order> addOrder(@RequestBody Order order) {
 		LOG.info("Adding new order");

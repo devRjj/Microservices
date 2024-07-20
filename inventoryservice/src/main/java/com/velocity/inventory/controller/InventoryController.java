@@ -15,6 +15,10 @@ import com.velocity.inventory.model.MasterProduct;
 import com.velocity.inventory.model.Product;
 import com.velocity.inventory.service.InventoryService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Inventory Controller", description = "APIs for inventory service")
 @RestController
 @RequestMapping("/api/inventory")
 public class InventoryController {
@@ -25,6 +29,7 @@ public class InventoryController {
 		this.inventoryService = inventoryService;
 	}
 
+	@Operation(summary = "Get product details by ID")
 	@GetMapping("/product/{id}")
 	public ResponseEntity<MasterProduct> getProductDetailsById(@PathVariable("id") Long productId) {
 		MasterProduct product = inventoryService.getProductDetailsById(productId);
@@ -35,12 +40,14 @@ public class InventoryController {
 		}
 	}
 	
+	@Operation(summary = "Add product to database")
 	@PostMapping("/product")
     public ResponseEntity<MasterProduct> addProductData(@RequestBody Product product) {
         MasterProduct newProduct = inventoryService.addProductData(product);
         return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
 
+	@Operation(summary = "Helps us to maintain the product quantity in inventory")
 	@PostMapping("/product/{id}/reduce")
 	public ResponseEntity<MasterProduct> reduceProductQuantity(@PathVariable("id") Long productId,
 			@RequestParam("qty") Integer qty) {

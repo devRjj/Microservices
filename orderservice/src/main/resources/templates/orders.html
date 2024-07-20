@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Orders</title>
+</head>
+<body style="width: 100%; background-color: #6c5d98a6">
+    <h1 style="margin-left: 750px;">Products List</h1>
+    <table style="margin: auto; background-color: #9f37e72b; width: 1000px;
+  height: 400px;">
+        <tr>
+            <th>productId</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td style="margin: auto" th:text="${order.productId}"></td>
+            <td style="margin: auto" th:text="${order.totalPrice}"></td>
+            <td style="margin: auto" th:text="${order.quantity}"></td>
+        </tr>
+    </table>
+</body>
+</html>

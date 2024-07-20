@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.velocity.payment.model.PaymentRequest;
 import com.velocity.payment.service.PaymentService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Payment Controller", description = "APIs for managing payment")
 @RestController
 @RequestMapping("/api/payments")
 public class PaymentController {
@@ -20,6 +24,8 @@ public class PaymentController {
 		this.paymentService = paymentService;
 	}
 	
+	
+	@Operation(summary = "do payment for payment specifications")
 	@PostMapping
 	public ResponseEntity<Long> doPayment(@RequestBody PaymentRequest paymentRequest){
 		return new ResponseEntity<Long>(paymentService.doPayment(paymentRequest),HttpStatus.OK);

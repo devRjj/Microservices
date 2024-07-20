@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.velocity.product.model.Product;
 import com.velocity.product.service.ProductService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Product Controller", description = "APIs for managing products")
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -30,6 +34,7 @@ public class ProductController {
 		this.productService = productService;
 	}
 
+	@Operation(summary = "Get all products")
 	@GetMapping
 	public ResponseEntity<List<Product>> getAllProducts() {
 		LOG.info("Fetching all products");
